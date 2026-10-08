@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Energy Management · Pomiary i analiza sieci elektrycznych</title>
+  <meta name="description" content="Analizy jakości energii, testy NC RfG, audyty energetyczne i nadzór instalacji elektrycznych dla zakładów przemysłowych i farm OZE. GLOBAL QUANTUM, Tomaszów Mazowiecki.">
+  <meta name="theme-color" content="#090D12">
+  <meta property="og:title" content="Energy Management · Mierzymy to, czego w sieci nie widać">
+  <meta property="og:description" content="Analizy jakości energii, testy NC RfG i nadzór instalacji elektrycznych dla przemysłu i farm OZE.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pl_PL">
+  <link rel="icon" href="assets/mark.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@100..125,400..800&family=Geist:wght@400..600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="scrollcraft.css">
+  <link rel="stylesheet" href="styles.css">
+  <script type="importmap">
+    { "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }
+  </script>
+</head>
+<body>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<header class="chrome">
+  <a class="chrome__logo" href="#obiekt" aria-label="Energy Management, początek strony">
+    <img src="assets/logo-light.png" alt="Energy Management" width="900" height="254">
+  </a>
+  <a class="chrome__cta" href="#kontakt">Zamów pomiar</a>
+</header>
+
+<main>
+
+  <!-- ============ 1. PRZYJAZD NA OBIEKT ============ -->
+  <section id="obiekt" class="hero" data-sc-act="pin" data-sc-span="1.8" data-sc-stage-name="Obiekt">
+    <div data-sc-stage class="hero__stage">
+      <div class="hero__sky" data-layer="sky" aria-hidden="true">
+        <div class="hero__sun"></div>
+        <div class="hero__clouds"></div>
+      </div>
+      <img class="hero__poster" src="assets/hero-poster.jpg" alt="" width="1920" height="1080" fetchpriority="high">
+      <canvas class="hero__gl" data-layer="gl" aria-hidden="true"></canvas>
+      <div class="hero__haze" data-layer="haze" aria-hidden="true"></div>
+
+      <div class="hero__scrim" aria-hidden="true"></div>
+      <div class="hero__copy" data-layer="copy">
+        <h1 class="hero__title">Mierzymy to, czego w&nbsp;sieci nie widać.</h1>
+        <p class="hero__lede">Analizy jakości energii, testy NC RfG i nadzór instalacji elektrycznych dla zakładów przemysłowych i farm OZE.</p>
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="#kontakt">Zamów pomiar</a>
+          <a class="btn btn--line" href="#uslugi">Zakres usług</a>
+        </div>
+      </div>
+
+      <svg class="hero__crew" data-layer="crew" viewBox="0 0 1600 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="ridgeFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#0B1118"/>
+            <stop offset="1" stop-color="#05080B"/>
+          </linearGradient>
+          <radialGradient id="screenGlow" cx="0.5" cy="0.5" r="0.5">
+            <stop offset="0" stop-color="#7FD3FF" stop-opacity=".55"/>
+            <stop offset="1" stop-color="#7FD3FF" stop-opacity="0"/>
+          </radialGradient>
+          <g id="crewShape">
+            <!-- Inspector A: standing, reading the analyzer tablet -->
+            <g stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1068 258 L1058 352" stroke-width="21"/>
+              <path d="M1078 258 L1092 350" stroke-width="21"/>
+              <rect x="1042" y="344" width="30" height="16" rx="6"/>
+              <rect x="1080" y="342" width="31" height="16" rx="6"/>
+              <path d="M1050 186 Q1048 222 1054 262 L1094 262 Q1098 222 1092 186 Q1072 176 1050 186 Z"/>
+              <path d="M1060 190 L1052 232 L1084 224" stroke-width="15" fill="none"/>
+              <path d="M1088 192 L1100 226 L1092 230" stroke-width="15" fill="none"/>
+              <circle cx="1074" cy="162" r="15"/>
+              <path d="M1078 176 L1080 186" stroke-width="12"/>
+              <path d="M1055 158 Q1056 136 1074 134 Q1093 135 1094 156 Z"/>
+              <path d="M1052 158 L1100 155" stroke-width="5"/>
+            </g>
+            <!-- Inspector B: kneeling at the switchgear with clamp probes -->
+            <g stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1196 284 L1224 312 L1222 354" stroke-width="20" fill="none"/>
+              <path d="M1196 290 L1170 322 L1150 354" stroke-width="20" fill="none"/>
+              <rect x="1134" y="346" width="28" height="14" rx="6"/>
+              <rect x="1214" y="346" width="26" height="14" rx="6"/>
+              <path d="M1176 222 Q1176 262 1190 292 L1212 288 Q1212 250 1210 222 Q1192 212 1176 222 Z"/>
+              <path d="M1204 228 L1234 250 L1258 244" stroke-width="14" fill="none"/>
+              <path d="M1184 230 L1200 266 L1226 270" stroke-width="14" fill="none"/>
+              <circle cx="1196" cy="200" r="14"/>
+              <path d="M1178 196 Q1179 175 1196 173 Q1214 174 1215 194 Z"/>
+              <path d="M1175 196 L1221 193" stroke-width="5"/>
+            </g>
+            <!-- analyzer case on the ground -->
+            <rect x="1100" y="326" width="46" height="32" rx="4"/>
+            <rect x="1114" y="320" width="18" height="8" rx="3"/>
+            <!-- switchgear cabinet -->
+            <rect x="1262" y="214" width="96" height="146" rx="3"/>
+            <rect x="1256" y="206" width="108" height="12" rx="2"/>
+          </g>
+        </defs>
+
+        <!-- far ridge -->
+        <path class="crew__far" d="M0 330 C180 300 320 318 470 304 C640 288 780 312 940 300 C1120 286 1300 296 1600 280 L1600 420 L0 420 Z"/>
+        <!-- near ridge the crew stands on -->
+        <path fill="url(#ridgeFill)" d="M0 376 C150 368 300 372 470 366 C640 360 820 364 960 358 C1100 352 1260 356 1420 352 C1500 350 1560 352 1600 350 L1600 420 L0 420 Z"/>
+        <path class="crew__grass" d="M40 372 l4 -12 l3 11 M180 370 l3 -9 l3 9 M330 371 l5 -13 l2 12 M520 365 l3 -10 l4 10 M690 362 l4 -12 l3 11 M860 360 l3 -9 l3 8 M1010 356 l4 -11 l2 10 M1300 355 l3 -10 l4 10 M1460 351 l4 -12 l3 11"/>
+        <g class="crew" transform="translate(-190 0)">
+        <!-- warm rim light, offset toward the sun -->
+        <use href="#crewShape" class="crew__rim" transform="translate(-2.2 -1)"/>
+        <use href="#crewShape" class="crew__body"/>
+        <!-- details that catch light -->
+        <path class="crew__cable" d="M1146 340 C1180 372 1236 368 1258 300"/>
+        <path class="crew__cable" d="M1258 244 C1268 236 1272 250 1274 262"/>
+        <g class="crew__stripes">
+          <path d="M1052 226 L1094 224"/><path d="M1053 244 L1095 243"/>
+          <path d="M1178 252 L1210 250"/><path d="M1180 268 L1211 266"/>
+          <path d="M1266 232 L1354 232"/>
+        </g>
+        <circle cx="1100" cy="220" r="34" fill="url(#screenGlow)"/>
+        <rect class="crew__screen" x="1090" y="208" width="24" height="17" rx="2" transform="rotate(-18 1102 216)"/>
+        <path class="crew__trace" d="M1093 218 q3 -6 6 0 t6 0 t6 0" transform="rotate(-18 1102 216)"/>
+        <circle class="crew__led" cx="1138" cy="334" r="2.4"/>
+        <circle class="crew__led crew__led--warn" cx="1342" cy="226" r="2.6"/>
+        </g>
+      </svg>
+
+      <p class="hero__beat" data-layer="beat">Od rozdzielni w&nbsp;hali produkcyjnej po farmę wiatrową. Wszędzie tam, gdzie prąd musi płynąć bez zakłóceń.</p>
+
+      <svg class="hero__fore" data-layer="fore" viewBox="0 0 1600 300" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs><filter id="foreBlur" x="-10%" y="-30%" width="120%" height="160%"><feGaussianBlur stdDeviation="7"/></filter></defs>
+        <g filter="url(#foreBlur)">
+          <path d="M-40 300 L-40 180 C10 150 40 210 70 140 C90 190 120 160 140 120 C160 200 210 190 240 300 Z"/>
+          <path d="M1380 300 C1420 220 1450 230 1480 150 C1500 210 1530 190 1560 130 C1580 190 1620 200 1650 300 Z"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============ 2. NIEWIDOCZNE ============ -->
+  <section id="zaklocenia" class="quiet sc-section" data-sc-act="flow" data-sc-drift="#06090C" data-sc-stage-name="Zakłócenia">
+    <div class="sc-wrap quiet__grid">
+      <h2 class="quiet__line" data-sc-in>Zakłóceń w&nbsp;sieci nie słychać i&nbsp;nie widać. <span>Widać ich skutki.</span></h2>
+      <ul class="quiet__list" data-sc-in data-sc-stagger="110">
+        <li><strong>Falowniki i&nbsp;napędy wyłączają się.</strong> Bez wyraźnej przyczyny, zwykle w&nbsp;środku zmiany.</li>
+        <li><strong>Silniki i&nbsp;transformatory grzeją się.</strong> Bardziej, niż wynika z&nbsp;obciążenia.</li>
+        <li><strong>Na fakturze rosną opłaty za energię bierną.</strong> Zakład płaci za ponadumowny pobór co miesiąc, choć z&nbsp;tej energii nic nie ma.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ 3. POMIAR (peak) ============ -->
+  <section id="pomiar" class="scope" data-sc-act="pin" data-sc-span="3.4" data-sc-drift="#070B0F" data-sc-stage-name="Pomiar">
+    <div data-sc-stage class="scope__stage">
+      <canvas class="scope__canvas" aria-hidden="true"></canvas>
+      <div class="scope__copy">
+        <div class="scope__beat" data-sc-cue="0 0.2 0.02">
+          <h2>Tak wygląda napięcie w&nbsp;hali, w&nbsp;której „wszystko działa”.</h2>
+          <p>Poszarpany przebieg zamiast sinusoidy. Tego nie pokaże multimetr.</p>
+        </div>
+        <div class="scope__beat" data-sc-cue="0.2 0.48">
+          <h2>Analizator rozkłada go na składowe.</h2>
+          <p>Każda harmoniczna ma swoje źródło: napędy, falowniki, zasilacze impulsowe. Mierzymy je osobno i&nbsp;wiemy, gdzie szukać.</p>
+        </div>
+        <div class="scope__beat" data-sc-cue="0.48 0.76">
+          <h2>Potem usuwamy przyczyny, jedna po drugiej.</h2>
+          <p>Kompensacja mocy biernej, filtry, korekta nastaw zabezpieczeń. Wynik sprawdzamy kolejnym pomiarem.</p>
+        </div>
+        <div class="scope__beat" data-sc-cue="0.76">
+          <h2>Czysta sieć.</h2>
+          <p>Stabilna praca, bezpieczne urządzenia, spokojne odbiory techniczne. I&nbsp;niższe koszty energii.</p>
+        </div>
+      </div>
+      <div class="scope__legend" aria-hidden="true">
+        <span class="scope__tag" data-h="1">50&nbsp;Hz · składowa podstawowa</span>
+        <span class="scope__tag" data-h="3">150&nbsp;Hz · 3. harmoniczna</span>
+        <span class="scope__tag" data-h="5">250&nbsp;Hz · 5. harmoniczna</span>
+        <span class="scope__tag" data-h="7">350&nbsp;Hz · 7. harmoniczna</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. ZAKRES ============ -->
+  <section id="uslugi" class="index sc-section" data-sc-act="flow" data-sc-drift="#0C1218" data-sc-stage-name="Usługi">
+    <div class="sc-wrap">
+      <div class="index__head" data-sc-in>
+        <h2 class="index__title">Od jednego pomiaru po stały nadzór.</h2>
+        <p class="index__intro">Dziewięć obszarów, w&nbsp;których pracujemy na co dzień. Wybierz, żeby zobaczyć szczegóły.</p>
+      </div>
+      <ol class="index__list" data-sc-in data-sc-stagger="45">
+        <li class="svc is-open">
+          <button class="svc__btn" aria-expanded="true" aria-controls="svc-1"><span class="svc__name">Analiza jakości energii</span><span class="svc__ref">EN&nbsp;50160</span></button>
+          <div class="svc__body" id="svc-1"><div class="svc__inner">
+            <p>Analizatorami sieci rejestrujemy wahania napięcia, przepięcia, harmoniczne i&nbsp;współczynnik mocy. Wskazujemy źródła zakłóceń i&nbsp;sposób ich usunięcia.</p>
+            <svg class="draw" viewBox="0 0 240 120"><rect x="70" y="14" width="78" height="92" rx="6"/><rect x="80" y="24" width="58" height="34" rx="2" class="draw__faint"/><circle cx="92" cy="80" r="6"/><circle cx="126" cy="80" r="6"/><path d="M148 40 C186 40 186 92 214 92"/><path d="M206 84 a10 10 0 1 1 0 16 M222 84 a10 10 0 1 0 0 16"/><path d="M70 60 C30 60 40 100 18 100" class="draw__dim"/></svg>
+          </div></div>
+        </li>
+        <li class="svc">
+          <button class="svc__btn" aria-expanded="false" aria-controls="svc-2"><span class="svc__name">Kompensacja mocy biernej</span><span class="svc__ref">tg&nbsp;φ · baterie kondensatorów</span></button>
+          <div class="svc__body" id="svc-2"><div class="svc__inner">
+            <p>Analizujemy dane z&nbsp;baterii kondensatorów: jak kompensuje, czy nie traci wydajności, czy nie zbliża się awaria. Mniej opłat za ponadumowny pobór energii biernej.</p>
+            <svg class="draw" viewBox="0 0 240 120"><path d="M40 20 L40 100 M200 20 L200 100" class="draw__faint"/><path d="M40 30 L200 30" class="draw__faint"/><path d="M80 30 L80 54 M64 54 L96 54 M64 64 L96 64 M80 64 L80 100"/><path d="M120 30 L120 54 M104 54 L136 54 M104 64 L136 64 M120 64 L120 100"/><path d="M160 30 L160 54 M144 54 L176 54 M144 64 L176 64 M160 64 L160 100"/><path d="M40 100 L200 100" class="draw__dim"/></svg>
+          </div></div>
+        </li>
+        <li class="svc">
+          <button class="svc__btn" aria-expanded="false" aria-controls="svc-3"><span class="svc__name">Certyfikacja i&nbsp;testy NC&nbsp;RfG</span><span class="svc__ref">Kodeksy sieciowe</span></button>
+          <div class="svc__body" id="svc-3"><div class="svc__inner">
+            <p>Testy zgodności dla certyfikacji elektrowni odnawialnych. Prowadzimy obiekt do ostatecznego pozwolenia na użytkowanie.</p>
+            <svg class="draw" viewBox="0 0 240 120"><path d="M70 112 L76 40 L82 112"/><circle cx="76" cy="36" r="5"/><path d="M76 36 L76 4 M76 36 L104 52 M76 36 L48 52"/><path d="M140 60 l18 18 l40 -46"/><rect x="128" y="20" width="96" height="84" rx="4" class="draw__faint"/></svg>
+          </div></div>
+        </li>
+        <li class="svc">
+          <button class="svc__btn" aria-expanded="false" aria-controls="svc-4"><span class="svc__name">Audyty i&nbsp;optymalizacja zużycia</span><span class="svc__ref">Koszty energii</span></button>
+          <div class="svc__body" id="svc-4"><div class="svc__inner">
+            <p>Mierzymy, gdzie i&nbsp;kiedy zakład zużywa energię. Pokazujemy, które zmiany obniżą koszty operacyjne najbardziej.</p>
+            <svg class="draw" viewBox="0 0 240 120"><path d="M40 100 A80 80 0 0 1 200 100"/><path d="M120 100 L168 52"/><circle cx="120" cy="100" r="6"/><path d="M52 70 l10 6 M74 44 l8 9 M120 26 l0 12 M166 44 l-8 9 M188 70 l-10 6" class="draw__dim"/></svg>
+          </div></div>
+        </li>
+        <li class="svc">
+          <button class="svc__btn" aria-expanded="false" aria-controls="svc-5"><span class="svc__name">Konfiguracja i&nbsp;programowanie</span><span class="svc__ref">Sterowniki polowe · nastawy</span></button>
+          <div class="svc__body" id="svc-5"><div class="svc__inner">
+            <p>Konfiguracja sterowników polowych, programowanie nastaw zabezpieczeń i&nbsp;uruchamianie stacji transformatorowych. Indywidualne limity napięcia i&nbsp;mocy ustawiamy w&nbsp;oprogramowaniu pod Twoją instalację.</p>
+            <svg class="draw" viewBox="0 0 240 120"><rect x="20" y="24" width="72" height="72" rx="4"/><path d="M92 44 L140 44 M92 76 L140 76"/><path d="M140 30 L140 90 L200 90 L200 30 Z" class="draw__faint"/><path d="M152 60 l14 0 l10 -14 M176 60 l14 0"/><circle cx="40" cy="44" r="4"/><circle cx="56" cy="44" r="4"/><path d="M32 74 L80 74" class="draw__dim"/></svg>
+          </div></div>
+        </li>
+        <li class="svc">
+          <button class="svc__btn" aria-expanded="false" aria-controls="svc-6"><span class="svc__name">Przeglądy stacji transformatorowych</span><span class="svc__ref">Utrzymanie ruchu</span></button>
+          <div class="svc__body" id="svc-6"><div class="svc__inner">
+            <p>Regularne przeglądy, pomiary i&nbsp;konserwacja stacji. Usuwanie usterek i&nbsp;przygotowanie urządzeń do eksploatacji.</p>
+            <svg class="draw" viewBox="0 0 240 120"><circle cx="100" cy="60" r="34"/><circle cx="140" cy="60" r="34"/><path d="M10 60 L66 60 M174 60 L230 60" class="draw__dim"/></svg>
+          </div></div>
+        </li>
+        <li class="svc">
+          <button class="svc__btn" aria-expanded="false" aria-controls="svc-7"><span class="svc__name">Obsługa farm OZE</span><span class="svc__ref">PV · wiatr · biogaz</span></button>
+          <div class="svc__body" id="svc-7"><div class="svc__inner">
+            <p>Farmy fotowoltaiczne, wiatrowe i&nbsp;biogazownie: monitoring pracy, serwis, przeglądy okresowe i&nbsp;raporty produkcji energii.</p>
+            <svg class="draw" viewBox="0 0 240 120"><path d="M14 100 L60 64 L130 64 L94 100 Z"/><path d="M37 82 L112 82 M60 64 L48 100 M95 64 L72 100" class="draw__faint"/><path d="M186 110 L190 44 L194 110"/><circle cx="190" cy="40" r="4"/><path d="M190 40 L190 10 M190 40 L216 54 M190 40 L164 54"/></svg>
+          </div></div>
+        </li>
+        <li class="svc">
+          <button class="svc__btn" aria-expanded="false" aria-controls="svc-8"><span class="svc__name">Nadzór inwestycji</span><span class="svc__ref">Odbiory techniczne</span></button>
+          <div class="svc__body" id="svc-8"><div class="svc__inner">
+            <p>Nadzorujemy inwestycje energetyczne i&nbsp;budowlane w&nbsp;zakresie elektryki: zgodność z&nbsp;projektem i&nbsp;normami, odbiory techniczne.</p>
+            <svg class="draw" viewBox="0 0 240 120"><path d="M20 100 L220 100"/><path d="M40 100 L40 40 L100 40 L100 100 M100 60 L160 60 L160 100"/><path d="M178 70 Q178 44 200 42 Q222 44 222 70 Z"/><path d="M172 70 L228 70"/><path d="M40 40 L70 14 L100 40" class="draw__faint"/></svg>
+          </div></div>
+        </li>
+        <li class="svc">
+          <button class="svc__btn" aria-expanded="false" aria-controls="svc-9"><span class="svc__name">Pomiary dla firm i&nbsp;domów</span><span class="svc__ref">Instalacje elektryczne</span></button>
+          <div class="svc__body" id="svc-9"><div class="svc__inner">
+            <p>Pomiary instalacji elektrycznych w&nbsp;firmach i&nbsp;gospodarstwach domowych. Także tam, gdzie po montażu fotowoltaiki falownik zaczął się wyłączać.</p>
+            <svg class="draw" viewBox="0 0 240 120"><path d="M50 104 L50 54 L120 14 L190 54 L190 104 Z"/><path d="M72 46 L120 20 L168 46" class="draw__faint"/><rect x="100" y="66" width="40" height="38" rx="2"/><path d="M108 76 l24 0 M108 86 l24 0" class="draw__dim"/></svg>
+          </div></div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 5. PROCES ============ -->
+  <section id="proces" class="route" data-sc-act="pan" data-sc-span="3" data-sc-drift="#0A0F14" data-sc-stage-name="Proces">
+    <div data-sc-stage class="route__stage">
+      <div class="route__rail" data-sc-pan="0.04">
+        <div class="route__intro">
+          <h2>Od pierwszej rozmowy do&nbsp;ponownego pomiaru.</h2>
+          <p>Cztery etapy. Na każdym wiesz, co mierzymy i&nbsp;po co.</p>
+        </div>
+        <svg class="route__cable" viewBox="0 0 2400 200" preserveAspectRatio="none" aria-hidden="true">
+          <path class="route__cable-base" d="M0 120 C300 120 360 60 600 60 S900 140 1200 140 S1500 60 1800 60 S2100 120 2400 120"/>
+          <path class="route__cable-live" d="M0 120 C300 120 360 60 600 60 S900 140 1200 140 S1500 60 1800 60 S2100 120 2400 120"/>
+        </svg>
+        <article class="step">
+          <span class="step__node" aria-hidden="true"></span>
+          <h3>Rozpoznanie</h3>
+          <p>Rozmawiamy o&nbsp;objawach, przeglądamy schemat instalacji i&nbsp;ustalamy punkty pomiarowe.</p>
+        </article>
+        <article class="step step--low">
+          <span class="step__node" aria-hidden="true"></span>
+          <h3>Pomiar na obiekcie</h3>
+          <p>Analizatory sieci rejestrują parametry w&nbsp;rozdzielni, tak żeby objąć typową pracę zakładu, a&nbsp;nie jedną chwilę.</p>
+        </article>
+        <article class="step">
+          <span class="step__node" aria-hidden="true"></span>
+          <h3>Analiza i&nbsp;raport</h3>
+          <p>Wyniki odnosimy do normy EN&nbsp;50160 i&nbsp;warunków przyłączenia. Raport mówi co, gdzie i&nbsp;dlaczego.</p>
+        </article>
+        <article class="step step--low">
+          <span class="step__node" aria-hidden="true"></span>
+          <h3>Wdrożenie i&nbsp;nadzór</h3>
+          <p>Filtry, kompensacja, nastawy zabezpieczeń. Po zmianach mierzymy ponownie i&nbsp;porównujemy.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. GDZIE MIERZYMY ============ -->
+  <section id="obiekty" class="site sc-section" data-sc-act="flow" data-sc-drift="#0B1016" data-sc-stage-name="Obiekty">
+    <div class="sc-wrap">
+      <div class="site__head" data-sc-in>
+        <h2>Gdzie przyjeżdżamy z&nbsp;analizatorem?</h2>
+        <p>Wybierz obiekt i&nbsp;kliknij punkt pomiarowy. Zobaczysz, co dokładnie sprawdzamy w&nbsp;każdym miejscu.</p>
+      </div>
+      <div class="site__tabs" role="tablist" aria-label="Rodzaj obiektu"><button class="site__tab" role="tab" id="tab-zaklad" aria-controls="site-zaklad" aria-selected="true" tabindex="0" data-site="zaklad">Zakład produkcyjny</button><button class="site__tab" role="tab" id="tab-pv" aria-controls="site-pv" aria-selected="false" tabindex="-1" data-site="pv">Farma fotowoltaiczna</button><button class="site__tab" role="tab" id="tab-wiatr" aria-controls="site-wiatr" aria-selected="false" tabindex="-1" data-site="wiatr">Farma wiatrowa</button><button class="site__tab" role="tab" id="tab-stacja" aria-controls="site-stacja" aria-selected="false" tabindex="-1" data-site="stacja">Stacja transformatorowa</button><button class="site__tab" role="tab" id="tab-dom" aria-controls="site-dom" aria-selected="false" tabindex="-1" data-site="dom">Dom i biuro</button></div>
+      <div class="site__body">
+        <div class="site__stage">
+          <div class="site__panel is-active" id="site-zaklad" role="tabpanel" aria-labelledby="tab-zaklad" data-name="Zakład produkcyjny"><div class="site__art"><svg viewBox="0 0 800 460" aria-hidden="true"><path class="ln ln--ground" d="M20 400 L780 400"/><path class="ln" d="M120 400 L120 230 L460 230 L460 400"/><path class="ln" d="M120 230 L170 180 L170 230 M210 230 L260 180 L260 230 M300 230 L350 180 L350 230 M390 230 L440 180 L440 230"/><path class="ln ln--faint" d="M460 400 L530 360 L530 200 L460 230 M440 180 L510 150 L530 200"/><rect class="ln ln--faint" x="140" y="260" width="40" height="26" rx="2"/><rect class="ln ln--faint" x="202" y="260" width="40" height="26" rx="2"/><rect class="ln ln--faint" x="264" y="260" width="40" height="26" rx="2"/><rect class="ln ln--faint" x="326" y="260" width="40" height="26" rx="2"/><rect class="ln ln--faint" x="388" y="260" width="40" height="26" rx="2"/><rect class="ln" x="250" y="318" width="90" height="50" rx="2"/><circle class="ln" cx="205" cy="343" r="22"/><path class="ln" d="M196 343 l6 -10 l6 20 l6 -10"/><rect class="ln" x="40" y="300" width="46" height="100" rx="2"/><path class="ln ln--faint" d="M50 320 l26 0 M50 336 l26 0 M50 352 l26 0"/><path class="ln ln--dim" d="M86 360 C110 360 110 300 140 300"/><rect class="ln" x="580" y="310" width="60" height="90" rx="2"/><path class="ln ln--faint" d="M596 326 l0 24 M610 326 l0 24 M624 326 l0 24 M592 360 l40 0"/><rect class="ln" x="670" y="300" width="90" height="100" rx="2"/><path class="ln" d="M710 320 l-12 22 l14 0 l-12 22"/><path class="ln ln--dim" d="M640 370 L670 370 M580 380 L530 380"/></svg><button class="spot" style="left:7.88%;top:65.22%" data-title="Rozdzielnia główna nn" data-body="Tu zaczyna się analiza jakości energii: harmoniczne, zapady i wahania napięcia, przepięcia. Analizator rejestruje parametry przez cały cykl pracy." data-svc="svc-1" aria-label="Rozdzielnia główna nn"></button><button class="spot" style="left:25.62%;top:69.13%" data-title="Napędy i falowniki" data-body="Najczęstsze źródło harmonicznych w hali. Mierzymy, które odbiorniki zakłócają sieć i jak bardzo." data-svc="svc-1" aria-label="Napędy i falowniki"></button><button class="spot" style="left:37.50%;top:69.13%" data-title="Linia produkcyjna" data-body="Audyt pokazuje, gdzie i kiedy zakład zużywa najwięcej energii i co da się zoptymalizować." data-svc="svc-4" aria-label="Linia produkcyjna"></button><button class="spot" style="left:76.25%;top:67.39%" data-title="Bateria kondensatorów" data-body="Sprawdzamy, czy kompensacja działa i czy bateria nie traci wydajności. Od tego zależy tg φ i opłaty za energię bierną." data-svc="svc-2" aria-label="Bateria kondensatorów"></button><button class="spot" style="left:89.38%;top:65.22%" data-title="Stacja transformatorowa" data-body="Przeglądy, pomiary i konserwacja, konfiguracja sterowników polowych i nastaw zabezpieczeń." data-svc="svc-6" aria-label="Stacja transformatorowa"></button></div></div>
+          <div class="site__panel" id="site-pv" role="tabpanel" aria-labelledby="tab-pv" data-name="Farma fotowoltaiczna" hidden><div class="site__art"><svg viewBox="0 0 800 460" aria-hidden="true"><path class="ln ln--ground" d="M20 400 L780 400"/><path class="ln" d="M60 268 L480 268 L496 250 L76 250 Z"/><path class="ln ln--faint" d="M110 268 L126 250 M152 268 L168 250 M194 268 L210 250 M236 268 L252 250 M278 268 L294 250 M320 268 L336 250 M362 268 L378 250 M404 268 L420 250 M446 268 L462 250"/><path class="ln" d="M84 298 L504 298 L520 280 L100 280 Z"/><path class="ln ln--faint" d="M134 298 L150 280 M176 298 L192 280 M218 298 L234 280 M260 298 L276 280 M302 298 L318 280 M344 298 L360 280 M386 298 L402 280 M428 298 L444 280 M470 298 L486 280"/><path class="ln" d="M108 328 L528 328 L544 310 L124 310 Z"/><path class="ln ln--faint" d="M158 328 L174 310 M200 328 L216 310 M242 328 L258 310 M284 328 L300 310 M326 328 L342 310 M368 328 L384 310 M410 328 L426 310 M452 328 L468 310 M494 328 L510 310"/><path class="ln" d="M132 358 L552 358 L568 340 L148 340 Z"/><path class="ln ln--faint" d="M182 358 L198 340 M224 358 L240 340 M266 358 L282 340 M308 358 L324 340 M350 358 L366 340 M392 358 L408 340 M434 358 L450 340 M476 358 L492 340 M518 358 L534 340"/><path class="ln" d="M156 388 L576 388 L592 370 L172 370 Z"/><path class="ln ln--faint" d="M206 388 L222 370 M248 388 L264 370 M290 388 L306 370 M332 388 L348 370 M374 388 L390 370 M416 388 L432 370 M458 388 L474 370 M500 388 L516 370 M542 388 L558 370"/><rect class="ln" x="560" y="330" width="26" height="40" rx="2"/><rect class="ln" x="596" y="330" width="26" height="40" rx="2"/><rect class="ln" x="640" y="300" width="80" height="100" rx="2"/><path class="ln" d="M674 318 l-10 20 l12 0 l-10 20"/><path class="ln" d="M760 400 L742 150 L724 400 M730 320 L754 320 M734 240 L750 240 M714 180 L770 180"/><path class="ln ln--dim" d="M720 330 C735 300 735 220 742 182"/><rect class="ln" x="40" y="300" width="24" height="40" rx="2"/><path class="ln ln--faint" d="M52 300 L52 270 M44 276 L60 276"/></svg><button class="spot" style="left:6.50%;top:65.22%" data-title="Monitoring i raporty" data-body="Stały monitoring pracy, przeglądy okresowe i raporty produkcji energii." data-svc="svc-7" aria-label="Monitoring i raporty"></button><button class="spot" style="left:73.12%;top:71.74%" data-title="Falowniki" data-body="Zakłócenia generowane przez falowniki i ich reakcja na stan sieci. Także wyłączenia bez wyraźnej przyczyny." data-svc="svc-1" aria-label="Falowniki"></button><button class="spot" style="left:85.00%;top:65.22%" data-title="Stacja farmy" data-body="Testy NC RfG do certyfikacji i ostatecznego pozwolenia na użytkowanie. Nastawy zabezpieczeń i uruchomienie stacji." data-svc="svc-3" aria-label="Stacja farmy"></button><button class="spot" style="left:92.75%;top:39.13%" data-title="Punkt przyłączenia" data-body="Parametry, których wymaga operator sieci: napięcie, moc i jakość energii oddawanej do sieci." data-svc="svc-3" aria-label="Punkt przyłączenia"></button></div></div>
+          <div class="site__panel" id="site-wiatr" role="tabpanel" aria-labelledby="tab-wiatr" data-name="Farma wiatrowa" hidden><div class="site__art"><svg viewBox="0 0 800 460" aria-hidden="true"><path class="ln ln--ground" d="M20 400 L780 400"/><path class="ln" d="M144.4 400 L147.9 100 L152.1 100 L155.6 400"/><rect class="ln" x="145.8" y="94.4" width="16.799999999999997" height="9.799999999999999" rx="3"/><g class="rotor" style="transform-origin:150px 100px"><path class="ln" d="M150.0 100.0 L171.9 -24.1 M150.0 100.0 L246.5 181.0 M150.0 100.0 L31.6 143.1"/><circle class="ln" cx="150" cy="100" r="3.5"/></g><path class="ln" d="M326.0 360 L328.5 160 L331.5 160 L334.0 360"/><rect class="ln" x="327.0" y="156.0" width="12.0" height="7.0" rx="3"/><g class="rotor" style="transform-origin:330px 160px"><path class="ln" d="M330.0 160.0 L408.9 131.3 M330.0 160.0 L315.4 242.7 M330.0 160.0 L265.7 106.0"/><circle class="ln" cx="330" cy="160" r="2.5"/></g><path class="ln" d="M467.2 330 L468.95 200 L471.05 200 L472.8 330"/><rect class="ln" x="467.9" y="197.2" width="8.399999999999999" height="4.8999999999999995" rx="3"/><g class="rotor" style="transform-origin:470px 200px"><path class="ln" d="M470.0 200.0 L505.1 158.2 M470.0 200.0 L488.7 251.3 M470.0 200.0 L416.2 190.5"/><circle class="ln" cx="470" cy="200" r="1.75"/></g><path class="ln ln--faint" d="M560 400 L560 320 L760 320 L760 400"/><rect class="ln" x="590" y="340" width="60" height="60" rx="2"/><path class="ln" d="M600 340 l0 -16 M620 340 l0 -16 M640 340 l0 -16"/><path class="ln" d="M680 400 L680 300 L740 300 L740 400 M680 330 L740 330"/><path class="ln ln--dim" d="M150 400 C300 420 500 410 590 380"/></svg><button class="spot" style="left:18.75%;top:21.74%" data-title="Turbina" data-body="Testy zgodności NC RfG dla certyfikacji elektrowni, zanim farma dostanie pozwolenie na użytkowanie." data-svc="svc-3" aria-label="Turbina"></button><button class="spot" style="left:41.25%;top:34.78%" data-title="Serwis" data-body="Przeglądy okresowe, monitoring pracy i raporty produkcji." data-svc="svc-7" aria-label="Serwis"></button><button class="spot" style="left:77.50%;top:71.74%" data-title="Stacja i rozdzielnia" data-body="Konfiguracja sterowników polowych, programowanie nastaw zabezpieczeń, uruchomienie stacji." data-svc="svc-5" aria-label="Stacja i rozdzielnia"></button><button class="spot" style="left:88.75%;top:65.22%" data-title="Pola liniowe" data-body="Indywidualne limity napięcia i mocy ustawione w oprogramowaniu, alarmy przy przekroczeniach." data-svc="svc-5" aria-label="Pola liniowe"></button></div></div>
+          <div class="site__panel" id="site-stacja" role="tabpanel" aria-labelledby="tab-stacja" data-name="Stacja transformatorowa" hidden><div class="site__art"><svg viewBox="0 0 800 460" aria-hidden="true"><path class="ln ln--ground" d="M20 400 L780 400"/><rect class="ln" x="110" y="250" width="200" height="150" rx="2"/><path class="ln ln--faint" d="M122 262 L122 388 M138 262 L138 388 M154 262 L154 388 M170 262 L170 388 M186 262 L186 388 M202 262 L202 388 M218 262 L218 388 M234 262 L234 388 M250 262 L250 388 M266 262 L266 388 M282 262 L282 388 M298 262 L298 388"/><rect class="ln" x="130" y="200" width="160" height="30" rx="14"/><path class="ln" d="M150 250 L150 190 M142 230 L158 230 M144 214 L156 214 M144 200 L156 200"/><path class="ln" d="M210 250 L210 190 M202 230 L218 230 M204 214 L216 214 M204 200 L216 200"/><path class="ln" d="M270 250 L270 190 M262 230 L278 230 M264 214 L276 214 M264 200 L276 200"/><rect class="ln" x="380" y="230" width="60" height="170" rx="2"/><rect class="ln" x="450" y="230" width="60" height="170" rx="2"/><rect class="ln" x="520" y="230" width="60" height="170" rx="2"/><rect class="ln" x="590" y="230" width="60" height="170" rx="2"/><path class="ln ln--faint" d="M392 250 l36 0 M392 270 l20 0 M462 250 l36 0 M462 270 l20 0 M532 250 l36 0 M532 270 l20 0 M602 250 l36 0 M602 270 l20 0"/><path class="ln ln--dim" d="M410 330 l0 30 M480 330 l0 30 M550 330 l0 30 M620 330 l0 30"/><path class="ln ln--dim" d="M310 320 C340 320 350 300 380 300"/></svg><button class="spot" style="left:26.25%;top:54.35%" data-title="Transformator" data-body="Regularne przeglądy, pomiary i konserwacja. Usuwanie usterek i przygotowanie do eksploatacji." data-svc="svc-6" aria-label="Transformator"></button><button class="spot" style="left:60.00%;top:50.00%" data-title="Rozdzielnica SN" data-body="Konfiguracja sterowników polowych, programowanie nastaw zabezpieczeń i uruchomienie stacji dopasowanej do klienta." data-svc="svc-5" aria-label="Rozdzielnica SN"></button><button class="spot" style="left:77.50%;top:50.00%" data-title="Pole baterii kondensatorów" data-body="Analiza danych baterii: kompensacja mocy biernej, wydajność i wczesne wykrycie problemów." data-svc="svc-2" aria-label="Pole baterii kondensatorów"></button></div></div>
+          <div class="site__panel" id="site-dom" role="tabpanel" aria-labelledby="tab-dom" data-name="Dom i biuro" hidden><div class="site__art"><svg viewBox="0 0 800 460" aria-hidden="true"><path class="ln ln--ground" d="M20 400 L780 400"/><path class="ln" d="M220 400 L220 250 L400 140 L580 250 L580 400"/><path class="ln" d="M260 226 L400 142 L470 184 L330 268 Z"/><path class="ln ln--faint" d="M295 247 L435 163 M330 268 L400 142 M365 247 L435 205"/><rect class="ln" x="300" y="310" width="60" height="90" rx="2"/><rect class="ln" x="450" y="290" width="80" height="60" rx="2"/><rect class="ln" x="600" y="300" width="40" height="56" rx="2"/><path class="ln ln--faint" d="M608 314 l24 0 M608 326 l24 0 M608 338 l24 0"/><rect class="ln" x="160" y="300" width="40" height="40" rx="2"/><path class="ln" d="M170 320 l6 -6 l6 12 l6 -6"/><path class="ln ln--dim" d="M200 320 L220 320 M580 330 L600 330"/></svg><button class="spot" style="left:22.50%;top:65.22%" data-title="Falownik PV" data-body="Gdy po montażu fotowoltaiki falownik się wyłącza, mierzymy napięcie i jakość energii w punkcie przyłączenia." data-svc="svc-9" aria-label="Falownik PV"></button><button class="spot" style="left:45.62%;top:42.39%" data-title="Instalacja na dachu" data-body="Sprawdzamy, jak instalacja współpracuje z siecią i czy parametry mieszczą się w normie." data-svc="svc-1" aria-label="Instalacja na dachu"></button><button class="spot" style="left:77.50%;top:65.22%" data-title="Rozdzielnica" data-body="Pomiary instalacji elektrycznej w domu, biurze lub małej firmie." data-svc="svc-9" aria-label="Rozdzielnica"></button></div></div>
+          </div>
+        <aside class="site__info" aria-live="polite">
+          <p class="site__kicker">Punkt pomiarowy</p>
+          <h3 class="site__title"></h3>
+          <p class="site__text"></p>
+          <div class="site__links">
+            <a class="site__svc" href="#uslugi">Zobacz usługę</a>
+            <a class="site__order" href="#kontakt">Zamów pomiar tego obiektu</a>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. ZLECENIE ============ -->
+  <section id="kontakt" class="report sc-section" data-sc-act="flow" data-sc-drift="#DDE3E0" data-sc-stage-name="Zlecenie">
+    <div class="sc-wrap">
+      <div class="report__head" data-sc-in>
+        <h2>Trzy kroki do pomiaru.</h2>
+        <p>Odpowiedz na trzy pytania, a&nbsp;protokół zgłoszenia wypełni się sam. Oddzwonimy, żeby ustalić termin.</p>
+      </div>
+
+      <div class="report__grid">
+        <form class="wiz" action="#" novalidate>
+          <ol class="wiz__progress" aria-hidden="true"><li class="is-on">Obiekt</li><li>Sytuacja</li><li>Kontakt</li></ol>
+
+          <fieldset class="wiz__step is-on" data-step="1">
+            <legend>Jaki to obiekt?</legend>
+            <div class="pick">
+              <label><input type="radio" name="obiekt" value="Zakład produkcyjny"><span>Zakład produkcyjny</span></label>
+              <label><input type="radio" name="obiekt" value="Farma fotowoltaiczna"><span>Farma fotowoltaiczna</span></label>
+              <label><input type="radio" name="obiekt" value="Farma wiatrowa"><span>Farma wiatrowa</span></label>
+              <label><input type="radio" name="obiekt" value="Biogazownia"><span>Biogazownia</span></label>
+              <label><input type="radio" name="obiekt" value="Stacja transformatorowa"><span>Stacja transformatorowa</span></label>
+              <label><input type="radio" name="obiekt" value="Dom i biuro"><span>Dom lub biuro</span></label>
+            </div>
+            <div class="wiz__nav"><button class="btn btn--ink" type="button" data-next>Dalej</button><p class="wiz__msg" role="status"></p></div>
+          </fieldset>
+
+          <fieldset class="wiz__step" data-step="2" hidden>
+            <legend>Co się dzieje?</legend>
+            <div class="pick pick--multi">
+              <label><input type="checkbox" name="sytuacja" value="Wyłączenia falowników lub napędów"><span>Wyłączenia falowników lub napędów</span></label>
+              <label><input type="checkbox" name="sytuacja" value="Opłaty za energię bierną"><span>Opłaty za energię bierną</span></label>
+              <label><input type="checkbox" name="sytuacja" value="Grzanie się urządzeń"><span>Grzanie się urządzeń</span></label>
+              <label><input type="checkbox" name="sytuacja" value="Potrzebne testy NC RfG"><span>Potrzebne testy NC RfG</span></label>
+              <label><input type="checkbox" name="sytuacja" value="Uruchomienie lub przegląd stacji"><span>Uruchomienie lub przegląd stacji</span></label>
+              <label><input type="checkbox" name="sytuacja" value="Audyt i koszty energii"><span>Audyt i koszty energii</span></label>
+            </div>
+            <label class="f f--wide"><span>Dodatkowe informacje (opcjonalnie)</span><textarea name="opis" rows="3" placeholder="Np. falowniki wyłączają się po południu, przy pełnym obciążeniu…"></textarea></label>
+            <div class="wiz__nav"><button class="btn btn--ghost" type="button" data-prev>Wstecz</button><button class="btn btn--ink" type="button" data-next>Dalej</button><p class="wiz__msg" role="status"></p></div>
+          </fieldset>
+
+          <fieldset class="wiz__step" data-step="3" hidden>
+            <legend>Jak się z&nbsp;Tobą skontaktować?</legend>
+            <div class="order__row">
+              <label class="f"><span>Imię i&nbsp;nazwisko</span><input name="name" autocomplete="name" required minlength="2"></label>
+              <label class="f"><span>Firma (opcjonalnie)</span><input name="company" autocomplete="organization"></label>
+            </div>
+            <div class="order__row">
+              <label class="f"><span>E-mail</span><input name="email" type="email" autocomplete="email" required></label>
+              <label class="f"><span>Telefon</span><input name="phone" type="tel" autocomplete="tel" required minlength="9"></label>
+            </div>
+            <div class="wiz__nav"><button class="btn btn--ghost" type="button" data-prev>Wstecz</button><button class="btn btn--solid btn--ink" type="submit">Zamów pomiar</button><p class="wiz__msg" role="status" aria-live="polite"></p></div>
+          </fieldset>
+        </form>
+
+        <article class="slip" aria-label="Podgląd zgłoszenia">
+          <header class="slip__head">
+            <img src="assets/logo-dark.png" alt="" width="900" height="254">
+            <p>Zgłoszenie pomiaru<br><span data-slip="date"></span></p>
+          </header>
+          <dl class="slip__rows">
+            <div><dt>Obiekt</dt><dd data-slip="obiekt" data-empty="do uzupełnienia">do uzupełnienia</dd></div>
+            <div><dt>Sytuacja</dt><dd data-slip="sytuacja" data-empty="do uzupełnienia">do uzupełnienia</dd></div>
+            <div><dt>Zgłaszający</dt><dd data-slip="kontakt" data-empty="do uzupełnienia">do uzupełnienia</dd></div>
+            <div><dt>Zakres</dt><dd data-slip="zakres" data-empty="dobierzemy po rozmowie">dobierzemy po rozmowie</dd></div>
+          </dl>
+          <p class="slip__stamp" aria-hidden="true"><span>Przyjęte</span>Energy Management</p>
+        </article>
+      </div>
+
+      <div class="contacts">
+        <div class="contacts__firm">
+          <p><strong>GLOBAL QUANTUM sp.&nbsp;z&nbsp;o.o. sp.&nbsp;k.</strong></p>
+          <address>ul. Legionów 18<br>97-200 Tomaszów Mazowiecki</address>
+        </div>
+        <ul>
+          <li><span>Dział handlowy</span><a href="tel:+48693455902">+48 693 455 902</a><a href="mailto:oferty@gt-g.pl">oferty@gt-g.pl</a></li>
+          <li><span>Biuro</span><a href="tel:+48575180160">+48 575 180 160</a><a href="mailto:biuro@gt-g.pl">biuro@gt-g.pl</a></li>
+          <li><span>Serwis</span><a href="tel:+48577570620">+48 577 570 620</a></li>
+        </ul>
+      </div>
+
+      <footer class="colophon">
+        <img src="assets/logo-dark.png" alt="Energy Management" width="900" height="254" loading="lazy">
+        <p>© <span data-year>2026</span> GLOBAL QUANTUM sp. z o.o. sp. k. Wartości na analizatorze są symulacją poglądową.</p>
+      </footer>
+    </div>
+  </section>
+</main>
+
+<!-- ============ SIGNATURE: the analyzer strip ============ -->
+<nav class="meter" aria-label="Sekcje strony">
+  <div class="meter__scope">
+    <span class="meter__ch" aria-hidden="true">L1</span>
+    <canvas class="meter__canvas" aria-hidden="true"></canvas>
+  </div>
+  <dl class="meter__read" aria-hidden="true">
+    <div class="meter__thd"><dt>THD</dt><dd data-live="thd">15,8&nbsp;%</dd></div>
+    <div><dt>U<sub>rms</sub></dt><dd data-live="u">221,4&nbsp;V</dd></div>
+    <div><dt>tg φ</dt><dd data-live="pf">0,70</dd></div>
+  </dl>
+  <ol class="meter__stages"></ol>
+  <span class="meter__note">symulacja</span>
+</nav>
+
+<script src="scrollcraft.js"></script>
+<script src="grid.js"></script>
+<script type="module" src="hero3d.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
