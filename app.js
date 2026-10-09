@@ -140,42 +140,6 @@
     ctx.fillText('THD ' + G.fmt.thd(r.thd).replace(' ', ' '), gx0, gy - 8);
   }
 
-  /* ------------------------------------------------ analyzer strip ----- */
-  var meter = $('.meter');
-  var mcv = $('.meter__canvas', meter);
-  var live = {};
-  $$('[data-live]', meter).forEach(function (el) { live[el.getAttribute('data-live')] = el; });
-
-  var stageList = $('.meter__stages', meter);
-  var stages = $$('[data-sc-stage-name]').map(function (sec) {
-    var li = document.createElement('li');
-    var a = document.createElement('a');
-    a.href = '#' + sec.id;
-    a.textContent = sec.getAttribute('data-sc-stage-name');
-    li.appendChild(a);
-    stageList.appendChild(li);
-    return { sec: sec, a: a };
-  });
-
-  function drawMeter(t, s) {
-    var f = G.fit(mcv), ctx = f.ctx, w = f.w, h = f.h;
-    ctx.clearRect(0, 0, w, h);
-    ctx.strokeStyle = 'rgba(238,243,246,0.08)'; ctx.lineWidth = 1;
-    ctx.beginPath(); ctx.moveTo(0, h / 2); ctx.lineTo(w, h / 2); ctx.stroke();
-    ctx.lineWidth = 1.5;
-    ctx.strokeStyle = G.colour(G.clean);
-    // the strip scrolls like a running recorder
-    var off = reduce ? 0 : t * 0.35;
-    G.trace(ctx, function (x) { return G.voltage(s, x + off, 4, t); }, 0, w, h / 2, h * 0.36, 260);
-  }
-
-  var lastRead = 0;
-  function setRead(map, r) {
-    if (map.thd) { map.thd.innerHTML = G.fmt.thd(r.thd); map.thd.classList.toggle('is-bad', r.thd > 8); map.thd.classList.toggle('is-good', r.thd <= 8); }
-    if (map.u) { map.u.innerHTML = G.fmt.u(r.u); map.u.classList.toggle('is-bad', r.u < 225); }
-    if (map.pf) { map.pf.innerHTML = G.fmt.pf(r.tg); map.pf.classList.toggle('is-bad', r.tg > 0.4); map.pf.classList.toggle('is-good', r.tg <= 0.4); }
-  }
-
   /* -------------------------------------------------------- services -- */
   $$('.draw').forEach(function (svg) {
     $$('path, circle, rect', svg).forEach(function (el) {
@@ -277,22 +241,9 @@
     heroTick();
 
     scopeP = pinP(scope);
-    var sr = scope.getBoundingClientRect();
-    G.clean = sr.top > 0 ? 0 : cleanFromScope(scopeP);
-    var s = G.stateFor(G.clean);
-
     if (visible(scope)) drawScope(t);
 
-    // dock the strip into the protocol
-    var rr = report.getBoundingClientRect();
-    var docked = rr.top < vh * 0.55;
-    meter.classList.toggle('is-docked', docked);
-    chrome.classList.toggle('is-paper', rr.top < 60);
-    if (!docked && !document.hidden) drawMeter(t, s);
-    if (now - lastRead > 140) {
-      lastRead = now;
-      setRead(live, G.readouts(s, t));
-    }
+    chrome.classList.toggle('is-paper', report.getBoundingClientRect().top < 60);
 
     // route cable
     if (visible(route)) {
@@ -301,11 +252,6 @@
       cableLive.style.setProperty('--cable', String(G.clamp01(rp * 1.1)));
       steps.forEach(function (st, i) { st.classList.toggle('is-live', rp > (i + 0.35) / steps.length * 0.92); });
     }
-
-    // current stage
-    var cur = null;
-    stages.forEach(function (st) { if (st.sec.getBoundingClientRect().top < vh * 0.5) cur = st; });
-    stages.forEach(function (st) { st.a.setAttribute('aria-current', st === cur ? 'true' : 'false'); });
 
     requestAnimationFrame(tick);
   }

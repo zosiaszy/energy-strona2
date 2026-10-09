@@ -17,7 +17,7 @@
   --paper-ink: #0D1720;
   --paper-soft: #4A5864;
   --paper-accent: #0D6C9F;
-  --meter-h: 58px;
+  --meter-h: 0px;
   --r: 10px;
 }
 
@@ -382,7 +382,6 @@ p { margin: 0; text-wrap: pretty; }
 
 /* ============================================================ MOBILE == */
 @media (max-width: 860px) {
-  :root { --meter-h: 52px; }
   .chrome { padding: 12px var(--sc-gutter); }
   .chrome__logo img { height: 36px; }
   .hero__copy { top: 14%; translate: none; max-width: none; right: var(--sc-gutter); }
