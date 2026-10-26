@@ -156,7 +156,9 @@ p { margin: 0; text-wrap: pretty; }
 }
 .scope__tag[data-h="1"] { color: var(--sc-accent); }
 .scope__tag:not([data-h="1"]) { color: var(--warn); }
-.scope__tag.is-gone { text-decoration: line-through; }
+.scope__tag:not([data-h="1"]) { transition: color .4s; }
+.scope__tag.is-ok { color: var(--sc-accent); }
+.scope__tag.is-ok::after { content: " · w limicie"; color: var(--sc-ink-soft); }
 
 /* ========================================================== INDEX (4) == */
 .index__head { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--sc-7); align-items: end; margin-bottom: var(--sc-8); }

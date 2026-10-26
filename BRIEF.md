@@ -1,4 +1,4 @@
-# BRIEF: Energy Management (GLOBAL QUANTUM sp. z o.o. sp.k.)
+# BRIEF: Energy Management (Energy Management Sp. z o.o.)
 
 **Self-authored under explicit creative delegation.** Zofia: "przeanalizuj i
 zaproponuj, wygeneruj taka strone od nowa ale zgodnie z obecnymi trendami".
@@ -68,7 +68,7 @@ consequences, empty dark ground). Not dead scroll.
 
 - **Navigation:** no marketing bar. A fixed bottom instrument strip (analyzer)
   carries the waveform, three readouts and clickable stage ticks. Logo sits
-  small top-left, one text link "Zamów pomiar" top-right.
+  small top-left, one text link "Poproś o ofertę" top-right.
 - **Sequence:** arrival scene → disturbance → measurement → scope → method →
   field → report. Each act changes the instrument's state.
 - **Ending:** a paper measurement protocol (light ground), the analyzer docks

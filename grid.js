@@ -12,8 +12,8 @@
   var CLEAN = { h3: 0.015, h5: 0.012, h7: 0.008, sag: 0, flicker: 0, pf: 0.98 };
   var PHASE = { h3: 0.6, h5: 2.1, h7: 4.0 };
 
-  // Each disturbance is removed in its own window of the overall clean value,
-  // highest order first, so the order of removal is visible.
+  // Each disturbance is brought within its limit in its own window of the
+  // overall clean value, highest order first, so the order is visible.
   var ORDER = ['h7', 'h5', 'h3', 'sag', 'pf'];
   function stateFor(c) {
     var s = {};

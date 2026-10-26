@@ -104,19 +104,20 @@
     var lanes = [[1, 0.36], [3, 0.56], [5, 0.73], [7, 0.9]];
     lanes.forEach(function (ln, k) {
       var hN = ln[0], ly = top + laneH * ln[1];
-      var gone = hN === 1 ? 0 : s['h' + hN + 'T'];
-      var a = split * (1 - gone * 0.92);
+      // harmonics never disappear; they settle under their limit and stay on screen
+      var ok = hN === 1 ? 0 : s['h' + hN + 'T'];
+      var a = split * (1 - ok * 0.35);
       var tag = tags[k];
       if (tag) {
         tag.style.opacity = String(split);
         tag.style.top = (ly - laneH * 0.07 * (hN === 1 ? 1 : 0.5) - 26) + 'px';
         tag.style.left = x0 + 'px';
-        tag.classList.toggle('is-gone', gone > 0.6);
+        tag.classList.toggle('is-ok', ok > 0.6);
       }
       if (a < 0.01) return;
       ctx.globalAlpha = a;
       ctx.lineWidth = 1.6;
-      ctx.strokeStyle = hN === 1 ? 'rgb(96,196,240)' : 'rgb(242,165,58)';
+      ctx.strokeStyle = hN === 1 ? 'rgb(96,196,240)' : G.colour(ok);
       G.trace(ctx, function (x) { return G.voltage(s, x, cycles, t, hN); }, x0, x1, ly, laneH * 0.07, 400);
       ctx.globalAlpha = 1;
     });
@@ -226,7 +227,7 @@
     var row = document.getElementById(id);
     if (row) { var btn = row.closest('.svc').querySelector('.svc__btn'); if (!row.closest('.svc').classList.contains('is-open')) btn.click(); }
   });
-  // "Zamów pomiar tego obiektu" preselects step 1 of the order
+  // "Poproś o ofertę dla tego obiektu" preselects step 1 of the order
   info.order.addEventListener('click', function () {
     var r = $$('input[name=obiekt]').filter(function (x) { return x.value === siteChoice; })[0];
     if (r) { r.checked = true; syncSlip(); go(1); }
@@ -346,7 +347,7 @@
     setTimeout(function () {
       btn.disabled = false;
       slip.classList.add('is-stamped');
-      msg.textContent = 'Dziękujemy, zgłoszenie przyjęte. Oddzwonimy, żeby ustalić termin.';
+      msg.textContent = 'Dziękujemy, zapytanie przyjęte. Odezwiemy się z ofertą.';
       msg.classList.add('is-ok');
     }, 700);
   });
