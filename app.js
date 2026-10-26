@@ -23,7 +23,7 @@
   ScrollCraft.mount(document.body);
 
   var vh = innerHeight;
-  addEventListener('resize', function () { vh = innerHeight; }, { passive: true });
+  addEventListener('resize', function () { vh = innerHeight; lastY = -1; heroLast = -1; }, { passive: true });
 
   // progress through a pinned act: 0 when the stage sticks, 1 when it releases
   function pinP(el) {
@@ -36,8 +36,12 @@
   var hero = $('#obiekt');
   var L = {};
   $$('[data-layer]', hero).forEach(function (el) { L[el.getAttribute('data-layer')] = el; });
+  var heroLast = -1;
   function heroTick() {
     var p = pinP(hero);
+    // past the hero (or holding still) the layers are already where they belong
+    if (p === heroLast) return;
+    heroLast = p;
     window.HeroP = p;
     if (reduce) { L.beat.style.opacity = p > 0.45 ? '1' : '0'; L.copy.style.opacity = p > 0.45 ? '0' : '1'; return; }
     var e = G.ease(p);
@@ -237,12 +241,18 @@
   /* ------------------------------------------------------------ loop -- */
   function visible(el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < vh; }
 
+  var lastY = -1;
   function tick(now) {
     var t = now / 1000;
-    heroTick();
+    var y = window.scrollY, moved = y !== lastY;
+    lastY = y;
 
-    scopeP = pinP(scope);
-    if (visible(scope)) drawScope(t);
+    // the scope trace animates over time, so it redraws every frame while on screen
+    if (visible(scope)) { scopeP = pinP(scope); drawScope(t); }
+
+    // everything else depends only on scroll position: skip frames where it held still
+    if (!moved) { requestAnimationFrame(tick); return; }
+    heroTick();
 
     chrome.classList.toggle('is-paper', report.getBoundingClientRect().top < 60);
 
@@ -284,9 +294,11 @@
     var el = slipF[key];
     var v = val || el.getAttribute('data-empty');
     if (el.textContent === v) return;
+    var wasFilled = el.classList.contains('is-filled');
     el.textContent = v;
     el.classList.toggle('is-filled', !!val);
-    el.classList.remove('is-ink'); void el.offsetWidth; if (val) el.classList.add('is-ink');
+    // replaying the ink on every keystroke forces a layout per key and makes typing stutter on phones
+    if (val && !wasFilled) { el.classList.remove('is-ink'); void el.offsetWidth; el.classList.add('is-ink'); }
   }
   function syncSlip() {
     var o = $('input[name=obiekt]:checked', wiz);

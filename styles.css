@@ -45,7 +45,7 @@ p { margin: 0; text-wrap: pretty; }
 }
 .chrome__cta:hover { background: var(--sc-accent); color: var(--sc-accent-ink); border-color: var(--sc-accent); }
 .chrome.is-paper .chrome__logo { opacity: 0; pointer-events: none; }
-.chrome.is-paper .chrome__cta { opacity: 0; pointer-events: none; }
+.chrome.is-paper .chrome__cta { opacity: 0; pointer-events: none; visibility: hidden; backdrop-filter: none; -webkit-backdrop-filter: none; }
 
 /* ----------------------------------------------------------- buttons -- */
 .btn {
@@ -383,6 +383,17 @@ p { margin: 0; text-wrap: pretty; }
 .meter__note { color: #5D6E7B; font-size: 10px; }
 
 /* ============================================================ MOBILE == */
+/* Phones: drop the effects that make the GPU recomposite the whole screen on
+   every scroll frame. The fixed grain layer is twice the viewport, and live
+   backdrop blur over moving content is the most expensive thing on the page. */
+@media (max-width: 860px), (pointer: coarse) {
+  .sc-grain { display: none; }
+  .chrome__cta, .btn--line { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .chrome__cta { background: color-mix(in oklab, var(--sc-canvas) 88%, transparent); }
+  .btn--line { background: rgba(9, 13, 18, .6); }
+  .slip { box-shadow: 0 2px 4px rgba(20, 30, 30, .06), 0 16px 32px -20px rgba(20, 40, 50, .3); }
+}
+
 @media (max-width: 860px) {
   .chrome { padding: 12px var(--sc-gutter); }
   .chrome__logo img { height: 36px; }
