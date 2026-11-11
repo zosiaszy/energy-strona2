@@ -231,10 +231,10 @@
     var row = document.getElementById(id);
     if (row) { var btn = row.closest('.svc').querySelector('.svc__btn'); if (!row.closest('.svc').classList.contains('is-open')) btn.click(); }
   });
-  // "Poproś o ofertę dla tego obiektu" preselects step 1 of the order
+  // "Poproś o ofertę" under a measuring point starts the message with that object
   info.order.addEventListener('click', function () {
-    var r = $$('input[name=obiekt]').filter(function (x) { return x.value === siteChoice; })[0];
-    if (r) { r.checked = true; syncSlip(); go(1); }
+    var opis = $('.ask textarea[name=opis]');
+    if (opis && !opis.value.trim()) opis.value = 'Obiekt: ' + siteChoice + '. ';
   });
   showSite('zaklad');
 
@@ -268,52 +268,13 @@
   }
   requestAnimationFrame(tick);
 
-  /* ---------------------------------------------------------- wizard -- */
-  var wiz = $('.wiz');
-  var wsteps = $$('.wiz__step', wiz);
-  var prog = $$('.wiz__progress li', wiz);
-  var slip = $('.slip');
-  var slipF = {};
-  $$('[data-slip]', slip).forEach(function (el) { slipF[el.getAttribute('data-slip')] = el; });
-  var stepNow = 0;
+  /* ------------------------------------------------------------ form -- */
+  var ask = $('.ask');
+  var askMsg = $('.ask__msg', ask);
   var msgs = {
     name: 'Podaj imię i nazwisko.',
-    email: 'Podaj poprawny adres e-mail.',
-    phone: 'Podaj numer telefonu.'
+    email: 'Podaj poprawny adres e-mail.'
   };
-  var SCOPE = {
-    'Wyłączenia falowników lub napędów': 'analiza jakości energii',
-    'Opłaty za energię bierną': 'kompensacja mocy biernej, tg φ',
-    'Grzanie się urządzeń': 'harmoniczne, obciążenie',
-    'Potrzebne testy NC RfG': 'testy NC RfG',
-    'Uruchomienie lub przegląd stacji': 'stacja, sterowniki polowe, nastawy',
-    'Audyt i koszty energii': 'audyt energetyczny'
-  };
-
-  function setSlip(key, val) {
-    var el = slipF[key];
-    var v = val || el.getAttribute('data-empty');
-    if (el.textContent === v) return;
-    var wasFilled = el.classList.contains('is-filled');
-    el.textContent = v;
-    el.classList.toggle('is-filled', !!val);
-    // replaying the ink on every keystroke forces a layout per key and makes typing stutter on phones
-    if (val && !wasFilled) { el.classList.remove('is-ink'); void el.offsetWidth; el.classList.add('is-ink'); }
-  }
-  function syncSlip() {
-    var o = $('input[name=obiekt]:checked', wiz);
-    setSlip('obiekt', o ? o.value : '');
-    var sit = $$('input[name=sytuacja]:checked', wiz).map(function (x) { return x.value; });
-    var opis = wiz.opis.value.trim();
-    setSlip('sytuacja', sit.join(', ') + (opis ? (sit.length ? '. ' : '') + opis : ''));
-    var who = [wiz.elements['name'].value.trim(), wiz.company.value.trim()].filter(Boolean).join(', ');
-    var how = [wiz.phone.value.trim(), wiz.email.value.trim()].filter(Boolean).join(' · ');
-    setSlip('kontakt', [who, how].filter(Boolean).join(' · '));
-    var sc = sit.map(function (x) { return SCOPE[x]; }).filter(Boolean);
-    setSlip('zakres', sc.length ? sc.join('; ') : '');
-  }
-  slipF.date.textContent = new Date().toLocaleDateString('pl-PL', { day: 'numeric', month: 'long', year: 'numeric' });
-
   function check(input) {
     var label = input.closest('.f');
     if (!label || !msgs[input.name]) return true;
@@ -321,46 +282,21 @@
     if (ok) label.removeAttribute('data-error'); else label.setAttribute('data-error', msgs[input.name]);
     return ok;
   }
-  function go(n) {
-    stepNow = n;
-    wsteps.forEach(function (st, i) { st.hidden = i !== n; st.classList.toggle('is-on', i === n); });
-    prog.forEach(function (li, i) { li.classList.toggle('is-on', i <= n); });
-    var first = $('input, textarea', wsteps[n]);
-    if (first && document.activeElement && wiz.contains(document.activeElement)) first.focus({ preventScroll: true });
-  }
-  function valid(n) {
-    var msg = $('.wiz__msg', wsteps[n]);
-    msg.textContent = '';
-    if (n === 0 && !$('input[name=obiekt]:checked', wiz)) { msg.textContent = 'Wybierz rodzaj obiektu.'; return false; }
-    if (n === 1 && !$$('input[name=sytuacja]:checked', wiz).length && !wiz.opis.value.trim()) { msg.textContent = 'Zaznacz przynajmniej jedną sytuację albo ją opisz.'; return false; }
-    return true;
-  }
-  $$('[data-next]', wiz).forEach(function (b) { b.addEventListener('click', function () { if (valid(stepNow)) go(stepNow + 1); }); });
-  $$('[data-prev]', wiz).forEach(function (b) { b.addEventListener('click', function () { go(stepNow - 1); }); });
-  wiz.addEventListener('change', syncSlip);
-  wiz.addEventListener('input', function (e) {
-    syncSlip();
-    var f = e.target.closest('.f'); if (f && f.hasAttribute('data-error')) check(e.target);
+  $$('[required]', ask).forEach(function (el) {
+    el.addEventListener('blur', function () { if (el.value) check(el); });
+    el.addEventListener('input', function () { if (el.closest('.f').hasAttribute('data-error')) check(el); });
   });
-  $$('input', wsteps[2]).forEach(function (el) { el.addEventListener('blur', function () { if (el.value) check(el); }); });
-  // a click on an object card moves straight on: one less decision
-  $$('input[name=obiekt]', wiz).forEach(function (r) {
-    r.addEventListener('click', function () { setTimeout(function () { if (stepNow === 0) go(1); }, 220); });
-  });
-
-  wiz.addEventListener('submit', function (e) {
+  ask.addEventListener('submit', function (e) {
     e.preventDefault();
-    var msg = $('.wiz__msg', wsteps[2]);
-    var bad = $$('[required]', wsteps[2]).filter(function (el) { return !check(el); });
-    if (bad.length) { bad[0].focus(); msg.textContent = 'Uzupełnij zaznaczone pola.'; msg.classList.remove('is-ok'); return; }
-    var btn = $('button[type=submit]', wiz);
-    btn.disabled = true; msg.textContent = 'Wysyłanie…';
+    var bad = $$('[required]', ask).filter(function (el) { return !check(el); });
+    if (bad.length) { bad[0].focus(); askMsg.textContent = 'Uzupełnij zaznaczone pola.'; askMsg.classList.remove('is-ok'); return; }
+    var btn = $('button[type=submit]', ask);
+    btn.disabled = true; askMsg.textContent = 'Wysyłanie…';
     // TODO: podpiąć endpoint (np. Formspree / Resend / własne API)
     setTimeout(function () {
       btn.disabled = false;
-      slip.classList.add('is-stamped');
-      msg.textContent = 'Dziękujemy, zapytanie przyjęte. Odezwiemy się z ofertą.';
-      msg.classList.add('is-ok');
+      askMsg.textContent = 'Dziękujemy, zapytanie przyjęte. Odezwiemy się z ofertą.';
+      askMsg.classList.add('is-ok');
     }, 700);
   });
 

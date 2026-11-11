@@ -977,7 +977,10 @@
         if (D.act.raw >= 1) { driftA = D; driftB = D; driftT = 1; }
       }
       if (driftA) {
-        docEl.style.setProperty('--sc-canvas', mixColor(driftB.rgb, driftA.rgb, driftT));
+        // Every element inherits this property, so a write restyles the whole
+        // document. Only write when the colour actually changes.
+        var canvasCol = mixColor(driftB.rgb, driftA.rgb, driftT);
+        if (canvasCol !== read.canvasCol) { read.canvasCol = canvasCol; docEl.style.setProperty('--sc-canvas', canvasCol); }
       }
 
       if (progressBar) {
