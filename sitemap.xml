@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- DO UZUPEŁNIENIA: wpisz domenę produkcyjną zamiast DOMENA i odkomentuj linię Sitemap w robots.txt. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://DOMENA/</loc>
+    <lastmod>2026-11-15</lastmod>
+  </url>
+</urlset>

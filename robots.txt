@@ -1,0 +1,8 @@
+# Indeksacja na domenie produkcyjnej. Kopie na *.vercel.app dostają nagłówek
+# X-Robots-Tag: noindex (vercel.json), więc nie konkurują z produkcją.
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Odkomentuj po potwierdzeniu domeny (ta sama domena co w sitemap.xml):
+# Sitemap: https://DOMENA/sitemap.xml
