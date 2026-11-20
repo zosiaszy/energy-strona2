@@ -249,12 +249,11 @@ html.js .svc__body:not(.is-open) { display: none; }
 .refs__intro { color: var(--sc-ink-soft); max-width: 40ch; }
 .refs__list { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sc-5); }
 
-/* a compact card with a gradient edge; on entry a light sweeps across it and an
-   approval stamp lands, the one moment of emphasis in the section */
+/* a compact card with a gradient edge; on entry a light sweeps across it */
 .ref {
   --edge: linear-gradient(135deg, rgba(58, 168, 224, .55), rgba(238, 243, 246, .08) 40%, rgba(242, 165, 58, .45));
   position: relative; margin: 0; overflow: hidden; isolation: isolate;
-  display: grid; grid-template-columns: 1fr auto; column-gap: var(--sc-5); row-gap: var(--sc-4); align-content: start;
+  display: grid; grid-template-columns: 1fr; row-gap: var(--sc-4); align-content: start;
   padding: clamp(1.25rem, 2.2vw, 1.75rem); border-radius: 14px;
   background: linear-gradient(180deg, #141D27, #0F161E) padding-box, var(--edge) border-box;
   border: 1px solid transparent;
@@ -289,15 +288,6 @@ html.js .svc__body:not(.is-open) { display: none; }
 .ref__quote p { font-family: var(--sc-font-display); font-stretch: 104%; font-weight: 500; font-size: clamp(1.05rem, .95rem + .45vw, 1.3rem); line-height: 1.4; letter-spacing: -0.01em; color: var(--sc-ink); }
 .ref__tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
 .ref__tags li { font-size: var(--sc-t-xs); padding: 4px 10px; border-radius: 999px; border: 1px solid var(--sc-hairline-strong); color: var(--sc-ink-soft); }
-.ref__stamp {
-  grid-column: 2; grid-row: 1; align-self: start;
-  display: grid; justify-items: center; padding: 6px 10px; border-radius: 8px; rotate: -8deg;
-  border: 2px solid #4CC38A; color: #4CC38A; font-family: var(--sc-font-mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; line-height: 1.2;
-}
-.ref__stamp span { font-family: var(--sc-font-display); font-size: 15px; font-weight: 800; letter-spacing: .04em; }
-html.js .ref__stamp { opacity: 0; scale: 1.9; }
-.ref.sc-in .ref__stamp { animation: stamp 520ms cubic-bezier(.2, 1.5, .4, 1) 750ms both; }
-@keyframes stamp { from { opacity: 0; scale: 1.9; } to { opacity: 1; scale: 1; } }
 .ref__more { font-size: var(--sc-t-sm); color: var(--sc-ink-soft); }
 .ref__more summary { cursor: pointer; min-height: 40px; display: inline-flex; align-items: center; color: var(--sc-accent); font-weight: 500; }
 .ref__more p { margin-top: var(--sc-2); }
@@ -555,7 +545,6 @@ html:not(.js) .step { margin: 0; }
   .route .step { margin: 0 0 var(--sc-6); position: relative; }
   .route .step__node { position: absolute; left: -27px; top: 6px; margin: 0; z-index: 1; }
   .route__intro h2 { font-size: var(--sc-t-xl); }
-  .ref { grid-template-columns: 1fr auto; }
 
   .ask { padding: var(--sc-5); }
   .report__grid { gap: var(--sc-6); }
@@ -585,5 +574,4 @@ html:not(.js) .step { margin: 0; }
   .site__art .rotor { animation: none; }
   .svc__body.is-open .svc__inner, html.js .site__panel.is-active, .site__detail.is-swap > * { animation: none; }
   .ref.sc-in::after { animation: none; }
-  html.js .ref__stamp, .ref.sc-in .ref__stamp { animation: none; opacity: 1; scale: 1; }
 }

@@ -48,9 +48,10 @@ Zrzutów ekranu od klienta (drugi ZIP) nie było w materiałach, więc stan „p
 - Model analizatora A.Eberle - PQ Box 150 jest wymieniony raz w usłudze i raz w procesie (wcześniej 5 razy).
 
 **Zaufali nam** (przeniesione przed eksplorator; przeprojektowane 15.11)
-- Kompaktowe karty z gradientową krawędzią: monogram (miejsce na logo klienta), nazwa i obiekt, krótki cytat, tagi zakresu, pieczątka „OPNU uzyskane”.
+- Kompaktowe karty z gradientową krawędzią: monogram (miejsce na logo klienta), nazwa i obiekt, krótki cytat, tagi zakresu.
 - Pełny fragment po rozwinięciu.
-- Animacja przy wejściu: smuga światła przez kartę i pieczątka, która „przybija się” z opóźnieniem. Hover unosi kartę. Przy reduced motion animacje są wyłączone.
+- Animacja przy wejściu: smuga światła przez kartę. Hover unosi kartę. Przy reduced motion animacja jest wyłączona.
+- 20.11: na prośbę klienta usunięte zielone pieczątki „OPNU uzyskane”.
 - Logotypów klientów nie dodałem: potrzebne pliki i zgoda (patrz lista od klienta).
 - Cytaty dosłowne z listów. Skróty oznaczone „[…]”.
 
