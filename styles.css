@@ -247,7 +247,7 @@ html.js .svc__body:not(.is-open) { display: none; }
 .refs__kicker { grid-column: 1 / -1; font-family: var(--sc-font-mono); font-size: var(--sc-t-xs); letter-spacing: .08em; text-transform: uppercase; color: var(--warn); margin-bottom: var(--sc-3); }
 .refs__head h2 { font-size: var(--sc-t-2xl); line-height: 1; letter-spacing: -0.03em; }
 .refs__intro { color: var(--sc-ink-soft); max-width: 40ch; }
-.refs__list { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sc-5); }
+.refs__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--sc-5); }
 
 /* a compact card with a gradient edge; on entry a light sweeps across it */
 .ref {

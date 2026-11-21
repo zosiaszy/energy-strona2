@@ -52,6 +52,7 @@ Zrzutów ekranu od klienta (drugi ZIP) nie było w materiałach, więc stan „p
 - Pełny fragment po rozwinięciu.
 - Animacja przy wejściu: smuga światła przez kartę. Hover unosi kartę. Przy reduced motion animacja jest wyłączona.
 - 20.11: na prośbę klienta usunięte zielone pieczątki „OPNU uzyskane”.
+- 21.11: dodana trzecia referencja: DOLMEB Sp. z o.o. (Świdnica), list z 16.11.2026; karty w 3 kolumnach na desktopie.
 - Logotypów klientów nie dodałem: potrzebne pliki i zgoda (patrz lista od klienta).
 - Cytaty dosłowne z listów. Skróty oznaczone „[…]”.
 
@@ -172,7 +173,7 @@ Zastrzeżenia:
 1. **Domena produkcyjna** (czy `www.energymgmt.pl`?) → canonical, og:url, og:image, sitemap, `ALLOWED_ORIGINS`.
 2. **Formularz:** dostęp do DNS domeny (weryfikacja nadawcy w Resend) albo decyzja o innym dostawcy; adres odbiorcy (`info@energymgmt.pl`?).
 3. **Dane firmy do potwierdzenia** w stopce i JSON-LD: nazwa, adres ul. Graniczna 9 lok. 23, e-mail. Czy dodać NIP/KRS/telefon?
-4. **Referencje:** zgoda Kopalni Soli „Wieliczka” S.A. i DP SOLAR Sp. z o.o. na publikację nazwy i cytatów oraz **pliki logotypów (SVG/PNG) ze zgodą na użycie**. W kodzie jest gotowe miejsce (`.ref__logo`), dziś pokazuje monogramy KSW i DP.
+4. **Referencje:** zgoda Kopalni Soli „Wieliczka” S.A., DP SOLAR Sp. z o.o. i DOLMEB Sp. z o.o. na publikację nazwy i cytatów oraz **pliki logotypów (SVG/PNG) ze zgodą na użycie**. W kodzie jest gotowe miejsce (`.ref__logo`), dziś pokazuje monogramy KSW i DP.
 5. **Polityka prywatności** (zatwierdzona treść) → dodam link przy formularzu.
 6. **Weryfikacja merytoryczna przez inżyniera:**
    - limit THD 8% / EN 50160 na wykresie
