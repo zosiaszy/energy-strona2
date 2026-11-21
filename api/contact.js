@@ -1,14 +1,21 @@
 // Vercel Serverless Function: POST /api/contact
-// Sends the contact form to the company inbox through Resend (https://resend.com).
+// Sends the contact form to the company inbox. Two ways, set ONE of them in
+// Vercel → Project → Settings → Environment Variables (never in the frontend):
 //
-// Required environment variables (Vercel → Project → Settings → Environment Variables):
-//   RESEND_API_KEY   API key from Resend (never put it in the frontend)
-//   CONTACT_TO       inbox that receives enquiries, e.g. info@energymgmt.pl
-//   CONTACT_FROM     verified sender in Resend, e.g. "Formularz Energy Management <formularz@energymgmt.pl>"
-// Optional:
+// A) the company's own mailbox at home.pl over SMTP (no extra service):
+//   SMTP_HOST        e.g. cloudserver3223481-3223512.home.pl
+//   SMTP_PORT        465 (SSL) – default
+//   SMTP_USER        full mailbox address, e.g. formularz@energymgmt.pl
+//   SMTP_PASS        that mailbox's password
+//   CONTACT_TO       optional; defaults to SMTP_USER. Several addresses comma-separated.
+//
+// B) Resend (https://resend.com):
+//   RESEND_API_KEY, CONTACT_TO, CONTACT_FROM (sender in a verified domain)
+//
+// Optional for both:
 //   ALLOWED_ORIGINS  comma-separated list of origins allowed to post, e.g. https://www.energymgmt.pl
 //
-// Until all three required variables are set the endpoint answers 503 "not_configured"
+// Until one way is fully configured the endpoint answers 503 "not_configured"
 // and the page tells the visitor to write by e-mail. It never reports a false success.
 
 const MIN_FILL_MS = 2500;          // humans need at least a few seconds to fill the form
@@ -30,6 +37,19 @@ function clean(v, max) {
 function oneLine(v) { return v.replace(/\s+/g, ' '); }
 function esc(s) { return s.replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])); }
 const EMAIL_RE = /^[^\s@<>()[\]\\,;:"]+@[^\s@<>()[\]\\,;:"]+\.[^\s@<>()[\]\\,;:"]{2,}$/;
+
+// SMTP through nodemailer; replaceable in tests.
+let sendSmtp = async (msg) => {
+  const { default: nodemailer } = await import('nodemailer');
+  const port = Number(process.env.SMTP_PORT || 465);
+  const transport = nodemailer.createTransport({
+    host: process.env.SMTP_HOST, port, secure: port === 465,
+    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+    connectionTimeout: 8000, greetingTimeout: 8000, socketTimeout: 12000
+  });
+  return transport.sendMail(msg);
+};
+export function _setSmtpSender(fn) { sendSmtp = fn; }
 
 export function validate(body) {
   const d = {};
@@ -115,9 +135,11 @@ export default async function handler(req, res) {
     return reply(req, res, 400, { ok: false, error: 'rejected', message: 'Nie udało się wysłać zapytania.' });
   }
 
-  const { RESEND_API_KEY, CONTACT_TO, CONTACT_FROM } = process.env;
-  if (!RESEND_API_KEY || !CONTACT_TO || !CONTACT_FROM) {
-    console.error('[contact] not configured: set RESEND_API_KEY, CONTACT_TO, CONTACT_FROM');
+  const { RESEND_API_KEY, CONTACT_TO, CONTACT_FROM, SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env;
+  const useSmtp = !!(SMTP_HOST && SMTP_USER && SMTP_PASS);
+  const useResend = !!(RESEND_API_KEY && CONTACT_TO && CONTACT_FROM);
+  if (!useSmtp && !useResend) {
+    console.error('[contact] not configured: set SMTP_HOST/SMTP_USER/SMTP_PASS or RESEND_API_KEY/CONTACT_TO/CONTACT_FROM');
     return reply(req, res, 503, { ok: false, error: 'not_configured' });
   }
 
@@ -128,6 +150,27 @@ export default async function handler(req, res) {
   const text = rows.map(([k, v]) => `${k}: ${v}`).join('\n') + `\n\nWiadomość:\n${data.message || '-'}\n`;
   const html = `<table cellpadding="6" style="font:14px system-ui,sans-serif;border-collapse:collapse">${rows.map(([k, v]) => `<tr><td style="color:#555">${esc(k)}</td><td><strong>${esc(v)}</strong></td></tr>`).join('')}</table><p style="font:14px system-ui,sans-serif;white-space:pre-wrap">${esc(data.message || '-')}</p>`;
 
+  const subject = `Zapytanie ze strony: ${data.topic || 'ogólne'} (${data.name})`;
+
+  if (useSmtp) {
+    try {
+      const info = await sendSmtp({
+        from: { name: 'Formularz Energy Management', address: SMTP_USER },
+        to: (CONTACT_TO || SMTP_USER).split(',').map((s) => s.trim()).filter(Boolean),
+        replyTo: { name: data.name, address: data.email },
+        subject, text, html
+      });
+      // success only when the mail server accepted at least one recipient
+      if (!info || !info.messageId || !(info.accepted && info.accepted.length)) {
+        return reply(req, res, 502, { ok: false, error: 'send_failed', message: 'Brak potwierdzenia wysyłki.' });
+      }
+      return reply(req, res, 200, { ok: true, id: info.messageId });
+    } catch (err) {
+      console.error('[contact] smtp error', err && (err.code || ''), err && err.message);
+      return reply(req, res, 502, { ok: false, error: 'send_failed', message: 'Serwer poczty odrzucił wiadomość.' });
+    }
+  }
+
   try {
     const r = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -136,7 +179,7 @@ export default async function handler(req, res) {
         from: CONTACT_FROM,
         to: CONTACT_TO.split(',').map((s) => s.trim()).filter(Boolean),
         reply_to: data.email,
-        subject: `Zapytanie ze strony: ${data.topic || 'ogólne'} (${data.name})`,
+        subject,
         text, html
       }),
       signal: AbortSignal.timeout(10000)

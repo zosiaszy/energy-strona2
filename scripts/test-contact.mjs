@@ -1,6 +1,7 @@
 // Tests for api/contact.js with a mocked mail provider. Run: npm test
 import assert from 'node:assert/strict';
-const { default: handler } = await import('../api/contact.js?' + Date.now());
+const mod = await import('../api/contact.js');
+const handler = mod.default;
 
 function call(body, { ct = 'application/json', method = 'POST', ip } = {}) {
   return new Promise((resolve) => {
@@ -64,5 +65,29 @@ await t('JSON bez znacznika czasu -> 400', async () => {
 });
 await t('limit 5 zapytań z jednego IP / 10 min -> 429', async () => {
   let last; for (let i = 0; i < 6; i++) last = await call(good(), { ip: '1.2.3.4' }); assert.equal(last.code, 429);
+});
+for (const k of ['RESEND_API_KEY', 'CONTACT_TO', 'CONTACT_FROM']) delete process.env[k];
+process.env.SMTP_HOST = 'smtp.test'; process.env.SMTP_USER = 'formularz@energymgmt.pl'; process.env.SMTP_PASS = 'x';
+let smtpSent = [];
+mod._setSmtpSender(async (m) => { smtpSent.push(m); return { messageId: '<id@test>', accepted: m.to }; });
+await t('SMTP home.pl: sukces tylko gdy serwer przyjął odbiorcę', async () => {
+  const r = await call(good()); assert.equal(r.code, 200); assert.equal(r.json.ok, true);
+  assert.equal(smtpSent[0].from.address, 'formularz@energymgmt.pl'); assert.deepEqual(smtpSent[0].to, ['formularz@energymgmt.pl']);
+  assert.equal(smtpSent[0].replyTo.address, 'jan@example.com');
+});
+await t('SMTP: CONTACT_TO nadpisuje odbiorcę', async () => {
+  process.env.CONTACT_TO = 'info@energymgmt.pl, m@energymgmt.pl'; smtpSent = [];
+  await call(good()); assert.deepEqual(smtpSent[0].to, ['info@energymgmt.pl', 'm@energymgmt.pl']); delete process.env.CONTACT_TO;
+});
+await t('SMTP: serwer nie przyjął odbiorcy -> 502', async () => {
+  mod._setSmtpSender(async () => ({ messageId: '<x>', accepted: [] }));
+  const r = await call(good()); assert.equal(r.code, 502);
+});
+await t('SMTP: błąd logowania -> 502, nie sukces', async () => {
+  mod._setSmtpSender(async () => { const e = new Error('Invalid login'); e.code = 'EAUTH'; throw e; });
+  const r = await call(good()); assert.equal(r.code, 502); assert.equal(r.json.ok, false);
+});
+await t('SMTP bez hasła -> 503 not_configured', async () => {
+  delete process.env.SMTP_PASS; const r = await call(good()); assert.equal(r.code, 503);
 });
 console.log(results.join('\n') + `\n${results.length} testów OK`);

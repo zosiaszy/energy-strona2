@@ -4,6 +4,7 @@
   "type": "module",
   "description": "Strona Energy Management: statyczny HTML/CSS/JS + funkcja Vercel dla formularza",
   "engines": { "node": ">=18" },
+  "dependencies": { "nodemailer": "^7.0.0" },
   "scripts": {
     "dev": "node scripts/dev.mjs",
     "test": "node scripts/test-contact.mjs"
